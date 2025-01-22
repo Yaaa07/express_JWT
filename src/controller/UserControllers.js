@@ -3,10 +3,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-// Muat variabel dari file .env
+
 dotenv.config();
 
-// Akses SECRET_KEY dari file .env
 const SECRET_KEY = process.env.SECRET_KEY;
 
 export const getUsers = async(req, res) =>{
@@ -123,9 +122,12 @@ export const loginUser = async (req, res) => {
             { expiresIn: "1h" }
         );
 
+        console.log("Generated Token:", token);
+        console.log("SECRET_KEY used for signing:", SECRET_KEY);
+
         res.status(200).json({
             msg: "Login successful",
-            token, // Kirim token ke klien
+            token,
         });
     } catch (error) {
         console.error(error.message);
