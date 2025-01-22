@@ -14,15 +14,15 @@ export const verifyToken = (req, res, next) => {
         return res.status(401).json({ msg: "Unauthorized" });
     }
 
-    const token = authHeader.split(" ")[1]; // Ambil token dari header
+    const token = authHeader.split(" ")[1]; 
     if (!token) {
         return res.status(403).json({ msg: "Access denied" });
     }
 
     try {
-        const decoded = jwt.verify(token, SECRET_KEY); // Verifikasi token
-        req.user = decoded; // Simpan info pengguna ke request
-        next(); // Lanjutkan ke middleware/rute berikutnya
+        const decoded = jwt.verify(token, SECRET_KEY); 
+        req.user = decoded; 
+        next(); 
     } catch (error) {
         res.status(403).json({ msg: "Invalid or expired token" });
     }
